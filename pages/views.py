@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.views.generic import edit
 from django.urls import reverse_lazy
@@ -17,7 +18,7 @@ class DetailView(generic.DetailView):
     context_object_name = "link"
 
 
-class CreateView(edit.CreateView):
+class CreateView(LoginRequiredMixin, edit.CreateView):
     model = UTM_source
     template_name = "pages/link_new.html"
     fields = [
@@ -28,6 +29,7 @@ class CreateView(edit.CreateView):
         "utm_term",
         "utm_content",
     ]
+    login_url = "account_login"
 
     def form_valid(self, form):
         form.instance.utm_user = self.request.user
