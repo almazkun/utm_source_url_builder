@@ -12,14 +12,14 @@ class ListView(generic.ListView):
     context_object_name = "links"
 
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(UserPassesTestMixin, LoginRequiredMixin, generic.DetailView):
     model = UTM_source
     template_name = "pages/link_details.html"
     context_object_name = "link"
     login_url = "account_login"
 
 
-class CreateView(LoginRequiredMixin, edit.CreateView):
+class CreateView(UserPassesTestMixin, LoginRequiredMixin, edit.CreateView):
     model = UTM_source
     template_name = "pages/link_new.html"
     fields = [
