@@ -17,9 +17,12 @@ class DetailView(UserPassesTestMixin, LoginRequiredMixin, generic.DetailView):
     template_name = "pages/link_details.html"
     context_object_name = "link"
     login_url = "account_login"
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.utm_user == self.request.user
 
-
-class CreateView(UserPassesTestMixin, LoginRequiredMixin, edit.CreateView):
+class CreateView(LoginRequiredMixin, edit.CreateView):
     model = UTM_source
     template_name = "pages/link_new.html"
     fields = [
