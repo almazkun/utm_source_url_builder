@@ -13,6 +13,7 @@ django-debug-toolbar = "==2.2"
 whitenoise = "==5.0.1"
 django-widget-tweaks = "*"
 gunicorn = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"
