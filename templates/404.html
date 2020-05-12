@@ -3,5 +3,8 @@
 {% block title %}404 Page not found{% endblock %}
 
 {% block content %}
-<h1>Page not found</h1>
+<div class="container">
+    <h1>Page not found</h1>
+    <a class="btn btn-primary" href="{% url "home" %}">Back</a>
+</div>
 {% endblock content %}

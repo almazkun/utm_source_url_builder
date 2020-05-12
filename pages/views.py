@@ -6,14 +6,10 @@ from django.urls import reverse_lazy
 from .models import UTM_source
 
 
-class ListView(UserPassesTestMixin, generic.ListView):
+class ListView(generic.ListView):
     model = UTM_source
     template_name = "pages/home.html"
     context_object_name = "links"
-    
-    def test_func(self):
-        obj = self.get_object()
-        return obj.utm_user == self.request.user
 
 
 class DetailView(UserPassesTestMixin, LoginRequiredMixin, generic.DetailView):
@@ -25,6 +21,7 @@ class DetailView(UserPassesTestMixin, LoginRequiredMixin, generic.DetailView):
     def test_func(self):
         obj = self.get_object()
         return obj.utm_user == self.request.user
+
 
 class CreateView(LoginRequiredMixin, edit.CreateView):
     model = UTM_source
