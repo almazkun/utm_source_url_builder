@@ -9,7 +9,7 @@
     <p class="lead">Your Google Analytics UTM source URL links</p>
     {% for link in links %}
       <div class=".text-monospace border border-round p-3 my-1">
-        <p>{{ link }}</p>
+        <p class="utm_link">{{ link }}</p>
         <a href="{% url "link_details" link.pk %}">Edit</a>
       </div>
     {% endfor %}
