@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block title %}Add New link{% endblock %}
+
+{% block content %}
+    <h1 class="display-4">Build your Link</h1>
+    <p class="lead">Google Analytics UTM source URL builder</p>
+    <form action="" method="post">{% csrf_token %}
+        {% include 'pages/includes/bs4_form.html' with form=form %}
+        <input class="btn btn-primary" type="submit" value="Save" />
+    </form>
+{% endblock content %}

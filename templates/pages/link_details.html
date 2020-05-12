@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block title %}Link details{% endblock %}
+
+{% block content %}
+
+<p>{{ link.utm_url }}</p>
+<p>{{ link.utm_source }}</p>
+<p>{{ link.utm_medium }}</p>
+<p>{{ link.utm_campaign }}</p>
+<p>{{ link.utm_term }}</p>
+<p>{{ link.utm_content }}</p>
+<p>{{ link.utm_user }}</p>
+<p>{{ link.created_on }}</p>
+<p>{{ link.updated_on }}</p>
+<p>{{ link }}</p>
+
+<div class="d-flex">
+<p><a class="btn btn-primary" href="{% url 'link_edit' link.pk %}">Edit Link</a></p>
+<p><a class="btn btn-danger ml-2" href="{% url 'link_delete' link.pk %}">Delete Link</a></p>
+</div>
+{% endblock content %}
