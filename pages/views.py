@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic
 from django.views.generic import edit
 from django.urls import reverse_lazy
@@ -12,10 +12,11 @@ class ListView(generic.ListView):
     context_object_name = "links"
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     model = UTM_source
     template_name = "pages/link_details.html"
     context_object_name = "link"
+    login_url = "account_login"
 
 
 class CreateView(LoginRequiredMixin, edit.CreateView):
@@ -36,7 +37,7 @@ class CreateView(LoginRequiredMixin, edit.CreateView):
         return super().form_valid(form)
 
 
-class UpdateView(edit.UpdateView):
+class UpdateView(UserPassesTestMixin, LoginRequiredMixin, edit.UpdateView):
     model = UTM_source
     template_name = "pages/link_edit.html"
     fields = [
@@ -47,9 +48,19 @@ class UpdateView(edit.UpdateView):
         "utm_term",
         "utm_content",
     ]
+    login_url = "account_login"
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.utm_user == self.request.user
 
 
-class DeleteView(edit.DeleteView):
+class DeleteView(UserPassesTestMixin, LoginRequiredMixin, edit.DeleteView):
     model = UTM_source
     template_name = "pages/link_delete.html"
     success_url = reverse_lazy("home")
+    login_url = "account_login"
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.utm_user == self.request.user
