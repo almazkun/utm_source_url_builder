@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # Local
     "users",
     "pages",
+    "api",
 ]
 
 # MIDDLEWARE
@@ -166,3 +167,24 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+# E_mail sending configs
+try:
+    from secret import LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL
+except:
+    LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL = "", "", ""
+    
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.yandex.ru"
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", LOCAL_EMAIL_USER)
+
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", LOCAL_EMAIL_PASSWORD)
+
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", LOCAL_DEFAULT_FROM_EMAIL)
+
+EMAIL_USE_TLS = True
