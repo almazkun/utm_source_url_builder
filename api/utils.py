@@ -9,4 +9,4 @@ def send_email(email_request):
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email_from]
     send_mail(subject, message, email_from, recipient_list)
-    print("mail sent", message)
+    print("mail sent", subject, message, email_from, recipient_list)
