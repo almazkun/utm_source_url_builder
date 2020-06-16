@@ -1,6 +1,12 @@
 import os
 import dj_database_url
 
+try:
+    from secret import LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL
+except:
+    LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL = "0", "0", "0"
+    
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -169,7 +175,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 try:
     from secret import LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL
 except:
-    LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL = "", "", ""
+    LOCAL_EMAIL_USER, LOCAL_EMAIL_PASSWORD, LOCAL_DEFAULT_FROM_EMAIL = "0", "0", "0"
     
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
