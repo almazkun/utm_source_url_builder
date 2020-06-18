@@ -8,9 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def api_receiver(request):
-    send_email(f"{request.META}")
-    if request.method == "POST":
-        received_json_data = json.loads(request.body.decode("utf-8"))
-        send_email(received_json_data)
+    send_email(f"{request.META}, {request.body.decode('utf-8')}")
+    if request.method == ("POST" or "GET"):
         return JsonResponse({"Status": "Success"})
     return JsonResponse({"Status": "Error"})
