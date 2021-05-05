@@ -1,4 +1,4 @@
-# link to demo: https://utm.akun.dev/?utm_source=GitHub&utm_campaign=GitHub
+# link to demo: [https://utm.akun.dev/](https://utm.akun.dev/?utm_source=GitHub&utm_campaign=GitHub)
 
 
 # Collect campaign data with custom URLs
